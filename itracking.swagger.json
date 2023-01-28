@@ -1,0 +1,2288 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "v1/role/role.proto",
+    "version": "version not set"
+  },
+  "tags": [
+    {
+      "name": "RoleService"
+    },
+    {
+      "name": "CategoryService"
+    },
+    {
+      "name": "AuthService"
+    },
+    {
+      "name": "UserService"
+    },
+    {
+      "name": "DepartmentService"
+    },
+    {
+      "name": "StatusService"
+    },
+    {
+      "name": "TicketService"
+    },
+    {
+      "name": "PriorityService"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/v1/auth/login/username": {
+      "post": {
+        "summary": "Sign in with username and password",
+        "description": "Use this API to start user authentication using the username",
+        "operationId": "AuthService_LoginByPhone",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/authAuthPayload"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/authLoginByUsernameRequest"
+            }
+          }
+        ],
+        "tags": [
+          "AuthService"
+        ]
+      }
+    },
+    "/v1/auth/refresh": {
+      "post": {
+        "summary": "Refresh auth token",
+        "description": "Use this API to refresh a user's access token",
+        "operationId": "AuthService_RefreshAuthToken",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/authRefreshTokenResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/authRefreshTokenRequest"
+            }
+          }
+        ],
+        "tags": [
+          "AuthService"
+        ]
+      }
+    },
+    "/v1/categories": {
+      "get": {
+        "summary": "List all categories",
+        "description": "Use this API to get a list of all categories",
+        "operationId": "CategoryService_GetCategories",
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/categoryCategory"
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "agent",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "query",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "CategoryService"
+        ]
+      },
+      "post": {
+        "summary": "Add category",
+        "description": "Use this API to add a category",
+        "operationId": "CategoryService_AddCategory",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/categoryCategory"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/categoryAddCategoryRequest"
+            }
+          }
+        ],
+        "tags": [
+          "CategoryService"
+        ]
+      }
+    },
+    "/v1/categories/{id}": {
+      "delete": {
+        "summary": "Delete category",
+        "description": "Use this API to delete a category",
+        "operationId": "CategoryService_DeleteCategory",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "type": "object",
+              "properties": {}
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "tags": [
+          "CategoryService"
+        ]
+      },
+      "patch": {
+        "summary": "Update category",
+        "description": "Use this API to update a category",
+        "operationId": "CategoryService_UpdateCategory",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/categoryCategory"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "description": {
+                  "type": "string"
+                },
+                "isActive": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        ],
+        "tags": [
+          "CategoryService"
+        ]
+      }
+    },
+    "/v1/category/{id}": {
+      "get": {
+        "summary": "Get category details",
+        "description": "Use this API to get a category details",
+        "operationId": "CategoryService_GetCategory",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/categoryCategory"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "tags": [
+          "CategoryService"
+        ]
+      }
+    },
+    "/v1/department/{id}": {
+      "get": {
+        "summary": "Get department details",
+        "description": "Use this API to get a department details",
+        "operationId": "DepartmentService_GetDepartment",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/departmentDepartment"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "tags": [
+          "DepartmentService"
+        ]
+      }
+    },
+    "/v1/departments": {
+      "get": {
+        "summary": "List all departments",
+        "description": "Use this API to get a list of all departments",
+        "operationId": "DepartmentService_GetDepartments",
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/departmentDepartment"
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "agent",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "query",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "DepartmentService"
+        ]
+      },
+      "post": {
+        "summary": "Add department",
+        "description": "Use this API to add a department",
+        "operationId": "DepartmentService_AddDepartment",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/departmentDepartment"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/departmentAddDepartmentRequest"
+            }
+          }
+        ],
+        "tags": [
+          "DepartmentService"
+        ]
+      }
+    },
+    "/v1/departments/{id}": {
+      "delete": {
+        "summary": "Delete department",
+        "description": "Use this API to delete a department",
+        "operationId": "DepartmentService_DeleteDepartment",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "type": "object",
+              "properties": {}
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "tags": [
+          "DepartmentService"
+        ]
+      },
+      "patch": {
+        "summary": "Update department",
+        "description": "Use this API to update a department",
+        "operationId": "DepartmentService_UpdateDepartment",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/departmentDepartment"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "description": {
+                  "type": "string"
+                },
+                "isActive": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        ],
+        "tags": [
+          "DepartmentService"
+        ]
+      }
+    },
+    "/v1/priorities": {
+      "get": {
+        "summary": "List all priorities",
+        "description": "Use this API to get a list of all priorities",
+        "operationId": "PriorityService_GetPriorities",
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/priorityPriority"
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "agent",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "query",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "PriorityService"
+        ]
+      },
+      "post": {
+        "summary": "Add priority",
+        "description": "Use this API to add a priority",
+        "operationId": "PriorityService_AddPriority",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/priorityPriority"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/priorityAddPriorityRequest"
+            }
+          }
+        ],
+        "tags": [
+          "PriorityService"
+        ]
+      }
+    },
+    "/v1/priorities/{id}": {
+      "delete": {
+        "summary": "Delete priority",
+        "description": "Use this API to delete a priority",
+        "operationId": "PriorityService_DeletePriority",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "type": "object",
+              "properties": {}
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "tags": [
+          "PriorityService"
+        ]
+      },
+      "patch": {
+        "summary": "Update priority",
+        "description": "Use this API to update a priority",
+        "operationId": "PriorityService_UpdatePriority",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/priorityPriority"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "description": {
+                  "type": "string"
+                },
+                "isActive": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        ],
+        "tags": [
+          "PriorityService"
+        ]
+      }
+    },
+    "/v1/priority/{id}": {
+      "get": {
+        "summary": "Get priority details",
+        "description": "Use this API to get a priority details",
+        "operationId": "PriorityService_GetPriority",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/priorityPriority"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "tags": [
+          "PriorityService"
+        ]
+      }
+    },
+    "/v1/role/{id}": {
+      "get": {
+        "summary": "Get role details",
+        "description": "Use this API to get a role details",
+        "operationId": "RoleService_GetRole",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/roleRole"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "tags": [
+          "RoleService"
+        ]
+      }
+    },
+    "/v1/roles": {
+      "get": {
+        "summary": "List all roles",
+        "description": "Use this API to get a list of all roles",
+        "operationId": "RoleService_GetRoles",
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/roleRole"
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "agent",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "query",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "RoleService"
+        ]
+      },
+      "post": {
+        "summary": "Add role",
+        "description": "Use this API to add a role",
+        "operationId": "RoleService_AddRole",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/roleRole"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/roleAddRoleRequest"
+            }
+          }
+        ],
+        "tags": [
+          "RoleService"
+        ]
+      }
+    },
+    "/v1/roles/{id}": {
+      "delete": {
+        "summary": "Delete role",
+        "description": "Use this API to delete a role",
+        "operationId": "RoleService_DeleteRole",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "type": "object",
+              "properties": {}
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "tags": [
+          "RoleService"
+        ]
+      },
+      "patch": {
+        "summary": "Update role",
+        "description": "Use this API to update a role",
+        "operationId": "RoleService_UpdateRole",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/roleRole"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "description": {
+                  "type": "string"
+                },
+                "isActive": {
+                  "type": "boolean"
+                },
+                "isAdmin": {
+                  "type": "boolean",
+                  "title": "role definitions"
+                },
+                "viewActivities": {
+                  "type": "boolean"
+                },
+                "viewAnalytics": {
+                  "type": "boolean"
+                },
+                "viewSystemsAdmin": {
+                  "type": "boolean"
+                },
+                "viewUsers": {
+                  "type": "boolean"
+                },
+                "viewDepartments": {
+                  "type": "boolean"
+                },
+                "viewRoles": {
+                  "type": "boolean"
+                },
+                "viewReports": {
+                  "type": "boolean"
+                },
+                "viewUserAnalytics": {
+                  "type": "boolean"
+                },
+                "modifyActivities": {
+                  "type": "boolean"
+                },
+                "modifyAnalytics": {
+                  "type": "boolean"
+                },
+                "modifyUsers": {
+                  "type": "boolean"
+                },
+                "modifyDepartments": {
+                  "type": "boolean"
+                },
+                "modifyRoles": {
+                  "type": "boolean"
+                },
+                "modifyReports": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        ],
+        "tags": [
+          "RoleService"
+        ]
+      }
+    },
+    "/v1/status/{id}": {
+      "get": {
+        "summary": "Get status details",
+        "description": "Use this API to get a status details",
+        "operationId": "StatusService_GetStatus",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1statusStatus"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "tags": [
+          "StatusService"
+        ]
+      }
+    },
+    "/v1/statuses": {
+      "get": {
+        "summary": "List all statuses",
+        "description": "Use this API to get a list of all statuses",
+        "operationId": "StatusService_GetStatuses",
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/v1statusStatus"
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "agent",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "query",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "StatusService"
+        ]
+      },
+      "post": {
+        "summary": "Add status",
+        "description": "Use this API to add a status",
+        "operationId": "StatusService_AddStatus",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1statusStatus"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/statusAddStatusRequest"
+            }
+          }
+        ],
+        "tags": [
+          "StatusService"
+        ]
+      }
+    },
+    "/v1/statuses/{id}": {
+      "delete": {
+        "summary": "Delete status",
+        "description": "Use this API to delete a status",
+        "operationId": "StatusService_DeleteStatus",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "type": "object",
+              "properties": {}
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "tags": [
+          "StatusService"
+        ]
+      },
+      "patch": {
+        "summary": "Update status",
+        "description": "Use this API to update a status",
+        "operationId": "StatusService_UpdateStatus",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1statusStatus"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "description": {
+                  "type": "string"
+                },
+                "isActive": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        ],
+        "tags": [
+          "StatusService"
+        ]
+      }
+    },
+    "/v1/ticket/{id}": {
+      "get": {
+        "summary": "Get ticket details",
+        "description": "Use this API to get a ticket details",
+        "operationId": "TicketService_GetTicket",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/ticketTicket"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "tags": [
+          "TicketService"
+        ]
+      }
+    },
+    "/v1/tickets": {
+      "get": {
+        "summary": "List all tickets",
+        "description": "Use this API to get a list of all tickets",
+        "operationId": "TicketService_GetTickets",
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ticketTicket"
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "agent",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "query",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "TicketService"
+        ]
+      },
+      "post": {
+        "summary": "Add ticket",
+        "description": "Use this API to add a ticket",
+        "operationId": "TicketService_AddTicket",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/ticketTicket"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ticketAddTicketRequest"
+            }
+          }
+        ],
+        "tags": [
+          "TicketService"
+        ]
+      }
+    },
+    "/v1/tickets/{id}": {
+      "delete": {
+        "summary": "Delete ticket",
+        "description": "Use this API to delete a ticket",
+        "operationId": "TicketService_DeleteTicket",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "type": "object",
+              "properties": {}
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "tags": [
+          "TicketService"
+        ]
+      },
+      "patch": {
+        "summary": "Update ticket",
+        "description": "Use this API to update a ticket",
+        "operationId": "TicketService_UpdateTicket",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/ticketTicket"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "category": {
+                  "type": "integer",
+                  "format": "int32"
+                },
+                "activityName": {
+                  "type": "string"
+                },
+                "description": {
+                  "type": "string"
+                },
+                "startDate": {
+                  "type": "string",
+                  "format": "date-time"
+                },
+                "endDate": {
+                  "type": "string",
+                  "format": "date-time"
+                },
+                "assignee": {
+                  "type": "integer",
+                  "format": "int32"
+                },
+                "priority": {
+                  "type": "integer",
+                  "format": "int32"
+                },
+                "status": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            }
+          }
+        ],
+        "tags": [
+          "TicketService"
+        ]
+      }
+    },
+    "/v1/user/{id}": {
+      "get": {
+        "summary": "Get user details",
+        "description": "Use this API to get a user details",
+        "operationId": "UserService_GetUser",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/userUser"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "tags": [
+          "UserService"
+        ]
+      }
+    },
+    "/v1/users": {
+      "get": {
+        "summary": "List all users",
+        "description": "Use this API to get a list of all users",
+        "operationId": "UserService_GetUsers",
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/userUser"
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "agent",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "query",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "UserService"
+        ]
+      },
+      "post": {
+        "summary": "Add user",
+        "description": "Use this API to add a user",
+        "operationId": "UserService_AddUser",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/userUser"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/userAddUserRequest"
+            }
+          }
+        ],
+        "tags": [
+          "UserService"
+        ]
+      }
+    },
+    "/v1/users/{id}": {
+      "delete": {
+        "summary": "Delete user",
+        "description": "Use this API to delete a user",
+        "operationId": "UserService_DeleteUser",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "type": "object",
+              "properties": {}
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "tags": [
+          "UserService"
+        ]
+      },
+      "patch": {
+        "summary": "Update user",
+        "description": "Use this API to update a user",
+        "operationId": "UserService_UpdateUser",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/userUser"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "firstName": {
+                  "type": "string"
+                },
+                "lastName": {
+                  "type": "string"
+                },
+                "username": {
+                  "type": "string"
+                },
+                "email": {
+                  "type": "string"
+                },
+                "phone": {
+                  "type": "string"
+                },
+                "department": {
+                  "type": "integer",
+                  "format": "int32"
+                },
+                "role": {
+                  "type": "integer",
+                  "format": "int32"
+                },
+                "isActive": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        ],
+        "tags": [
+          "UserService"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "authAuthPayload": {
+      "type": "object",
+      "properties": {
+        "sessionId": {
+          "type": "string"
+        },
+        "accessToken": {
+          "type": "string"
+        },
+        "accessTokenExpiresAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "refreshToken": {
+          "type": "string"
+        },
+        "refreshTokenExpiresAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "user": {
+          "$ref": "#/definitions/userUserProfile"
+        }
+      }
+    },
+    "authLoginByUsernameRequest": {
+      "type": "object",
+      "properties": {
+        "username": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        }
+      }
+    },
+    "authRefreshTokenRequest": {
+      "type": "object",
+      "properties": {
+        "refreshToken": {
+          "type": "string"
+        }
+      }
+    },
+    "authRefreshTokenResponse": {
+      "type": "object",
+      "properties": {
+        "accessToken": {
+          "type": "string"
+        },
+        "accessTokenExpiresAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "categoryAddCategoryRequest": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "isActive": {
+          "type": "boolean"
+        }
+      }
+    },
+    "categoryCategory": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "isActive": {
+          "type": "boolean"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "categoryGetCategoriesResponse": {
+      "type": "object",
+      "properties": {
+        "categories": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/categoryCategory"
+          }
+        },
+        "pages": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "departmentAddDepartmentRequest": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "isActive": {
+          "type": "boolean"
+        }
+      }
+    },
+    "departmentDepartment": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "isActive": {
+          "type": "boolean"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "departmentGetDepartmentsResponse": {
+      "type": "object",
+      "properties": {
+        "departments": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/departmentDepartment"
+          }
+        },
+        "pages": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "googlerpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    },
+    "priorityAddPriorityRequest": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "isActive": {
+          "type": "boolean"
+        }
+      }
+    },
+    "priorityGetPrioritiesResponse": {
+      "type": "object",
+      "properties": {
+        "priorities": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/priorityPriority"
+          }
+        },
+        "pages": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "priorityPriority": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "isActive": {
+          "type": "boolean"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "roleAddRoleRequest": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "isActive": {
+          "type": "boolean"
+        },
+        "isAdmin": {
+          "type": "boolean",
+          "title": "role definitions"
+        },
+        "viewActivities": {
+          "type": "boolean"
+        },
+        "viewAnalytics": {
+          "type": "boolean"
+        },
+        "viewSystemsAdmin": {
+          "type": "boolean"
+        },
+        "viewUsers": {
+          "type": "boolean"
+        },
+        "viewDepartments": {
+          "type": "boolean"
+        },
+        "viewRoles": {
+          "type": "boolean"
+        },
+        "viewReports": {
+          "type": "boolean"
+        },
+        "viewUserAnalytics": {
+          "type": "boolean"
+        },
+        "modifyActivities": {
+          "type": "boolean"
+        },
+        "modifyAnalytics": {
+          "type": "boolean"
+        },
+        "modifyUsers": {
+          "type": "boolean"
+        },
+        "modifyDepartments": {
+          "type": "boolean"
+        },
+        "modifyRoles": {
+          "type": "boolean"
+        },
+        "modifyReports": {
+          "type": "boolean"
+        }
+      }
+    },
+    "roleGetRolesResponse": {
+      "type": "object",
+      "properties": {
+        "roles": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/roleRole"
+          }
+        },
+        "pages": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "roleRole": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "isActive": {
+          "type": "boolean"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "isAdmin": {
+          "type": "boolean",
+          "title": "role definitions"
+        },
+        "viewActivities": {
+          "type": "boolean"
+        },
+        "viewAnalytics": {
+          "type": "boolean"
+        },
+        "viewSystemsAdmin": {
+          "type": "boolean"
+        },
+        "viewUsers": {
+          "type": "boolean"
+        },
+        "viewDepartments": {
+          "type": "boolean"
+        },
+        "viewRoles": {
+          "type": "boolean"
+        },
+        "viewReports": {
+          "type": "boolean"
+        },
+        "viewUserAnalytics": {
+          "type": "boolean"
+        },
+        "modifyActivities": {
+          "type": "boolean"
+        },
+        "modifyAnalytics": {
+          "type": "boolean"
+        },
+        "modifyUsers": {
+          "type": "boolean"
+        },
+        "modifyDepartments": {
+          "type": "boolean"
+        },
+        "modifyRoles": {
+          "type": "boolean"
+        },
+        "modifyReports": {
+          "type": "boolean"
+        }
+      }
+    },
+    "statusAddStatusRequest": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "isActive": {
+          "type": "boolean"
+        }
+      }
+    },
+    "statusGetStatusesResponse": {
+      "type": "object",
+      "properties": {
+        "statuses": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1statusStatus"
+          }
+        },
+        "pages": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "ticketAddTicketRequest": {
+      "type": "object",
+      "properties": {
+        "category": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "activityName": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "startDate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "endDate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "assignee": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "priority": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "attachments": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "byte"
+          }
+        },
+        "status": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "ticketGetTicketsResponse": {
+      "type": "object",
+      "properties": {
+        "tickets": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ticketTicket"
+          }
+        },
+        "pages": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "ticketTicket": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "category": {
+          "type": "string"
+        },
+        "activityName": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "startDate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "endDate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "assignee": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "priority": {
+          "type": "string"
+        },
+        "attachments": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "status": {
+          "type": "string"
+        }
+      }
+    },
+    "userAddUserRequest": {
+      "type": "object",
+      "properties": {
+        "firstName": {
+          "type": "string"
+        },
+        "lastName": {
+          "type": "string"
+        },
+        "username": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "phone": {
+          "type": "string"
+        },
+        "department": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "role": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "isActive": {
+          "type": "boolean"
+        }
+      }
+    },
+    "userGetUsersResponse": {
+      "type": "object",
+      "properties": {
+        "users": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/userUser"
+          }
+        },
+        "pages": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "userUser": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "firstName": {
+          "type": "string"
+        },
+        "lastName": {
+          "type": "string"
+        },
+        "username": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "phone": {
+          "type": "string"
+        },
+        "department": {
+          "type": "string"
+        },
+        "role": {
+          "type": "string"
+        },
+        "isActive": {
+          "type": "boolean"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "userUserProfile": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "username": {
+          "type": "string"
+        },
+        "isAdmin": {
+          "type": "boolean"
+        },
+        "roles": {
+          "type": "string"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "v1statusStatus": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "isActive": {
+          "type": "boolean"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "title": "New, Inprogress, Resolved"
+    }
+  }
+}
