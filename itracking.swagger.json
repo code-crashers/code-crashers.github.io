@@ -1127,51 +1127,8 @@
                 "active": {
                   "type": "boolean"
                 },
-                "isAdmin": {
-                  "type": "boolean",
-                  "title": "role definitions"
-                },
-                "viewActivities": {
-                  "type": "boolean"
-                },
-                "viewAnalytics": {
-                  "type": "boolean"
-                },
-                "viewSystemsAdmin": {
-                  "type": "boolean"
-                },
-                "viewUsers": {
-                  "type": "boolean"
-                },
-                "viewDepartments": {
-                  "type": "boolean"
-                },
-                "viewRoles": {
-                  "type": "boolean"
-                },
-                "viewReports": {
-                  "type": "boolean"
-                },
-                "viewUserAnalytics": {
-                  "type": "boolean"
-                },
-                "modifyActivities": {
-                  "type": "boolean"
-                },
-                "modifyAnalytics": {
-                  "type": "boolean"
-                },
-                "modifyUsers": {
-                  "type": "boolean"
-                },
-                "modifyDepartments": {
-                  "type": "boolean"
-                },
-                "modifyRoles": {
-                  "type": "boolean"
-                },
-                "modifyReports": {
-                  "type": "boolean"
+                "permissions": {
+                  "$ref": "#/definitions/rolePermissionsUpdate"
                 }
               }
             }
@@ -2374,6 +2331,29 @@
         "active": {
           "type": "boolean"
         },
+        "permissions": {
+          "$ref": "#/definitions/rolePermissions"
+        }
+      }
+    },
+    "roleGetRolesResponse": {
+      "type": "object",
+      "properties": {
+        "roles": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/roleRole"
+          }
+        },
+        "pages": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "rolePermissions": {
+      "type": "object",
+      "properties": {
         "isAdmin": {
           "type": "boolean",
           "title": "role definitions"
@@ -2422,22 +2402,7 @@
         }
       }
     },
-    "roleGetRolesResponse": {
-      "type": "object",
-      "properties": {
-        "roles": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/roleRole"
-          }
-        },
-        "pages": {
-          "type": "integer",
-          "format": "int32"
-        }
-      }
-    },
-    "rolePermissions": {
+    "rolePermissionsUpdate": {
       "type": "object",
       "properties": {
         "isAdmin": {
@@ -2513,7 +2478,7 @@
           "format": "date-time"
         },
         "permissions": {
-          "$ref": "#/definitions/rolePermissions"
+          "type": "string"
         }
       }
     },
