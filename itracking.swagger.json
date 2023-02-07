@@ -24,6 +24,12 @@
       "name": "StatusService"
     },
     {
+      "name": "ProductService"
+    },
+    {
+      "name": "SiteService"
+    },
+    {
       "name": "TicketService"
     },
     {
@@ -265,7 +271,7 @@
                 "description": {
                   "type": "string"
                 },
-                "isActive": {
+                "active": {
                   "type": "boolean"
                 }
               }
@@ -503,7 +509,7 @@
                 "description": {
                   "type": "string"
                 },
-                "isActive": {
+                "active": {
                   "type": "boolean"
                 }
               }
@@ -675,7 +681,7 @@
                 "description": {
                   "type": "string"
                 },
-                "isActive": {
+                "active": {
                   "type": "boolean"
                 }
               }
@@ -717,6 +723,211 @@
         ],
         "tags": [
           "PriorityService"
+        ]
+      }
+    },
+    "/v1/product/{id}": {
+      "get": {
+        "summary": "Get product details",
+        "description": "Use this API to get a product details",
+        "operationId": "ProductService_GetProduct",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/productProduct"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "tags": [
+          "ProductService"
+        ]
+      }
+    },
+    "/v1/products": {
+      "get": {
+        "summary": "List all products",
+        "description": "Use this API to get a list of all products",
+        "operationId": "ProductService_GetProducts",
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/productProduct"
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "agent",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "query",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "ProductService"
+        ]
+      },
+      "post": {
+        "summary": "Add product",
+        "description": "Use this API to add a product",
+        "operationId": "ProductService_AddProduct",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/productProduct"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/productAddProductRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ProductService"
+        ]
+      }
+    },
+    "/v1/products/{id}": {
+      "delete": {
+        "summary": "Delete product",
+        "description": "Use this API to delete a product",
+        "operationId": "ProductService_DeleteProduct",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "type": "object",
+              "properties": {}
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "tags": [
+          "ProductService"
+        ]
+      },
+      "patch": {
+        "summary": "Update product",
+        "description": "Use this API to update a product",
+        "operationId": "ProductService_UpdateProduct",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/productProduct"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "description": {
+                  "type": "string"
+                },
+                "active": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        ],
+        "tags": [
+          "ProductService"
         ]
       }
     },
@@ -913,7 +1124,7 @@
                 "description": {
                   "type": "string"
                 },
-                "isActive": {
+                "active": {
                   "type": "boolean"
                 },
                 "isAdmin": {
@@ -968,6 +1179,214 @@
         ],
         "tags": [
           "RoleService"
+        ]
+      }
+    },
+    "/v1/site/{id}": {
+      "get": {
+        "summary": "Get site details",
+        "description": "Use this API to get a site details",
+        "operationId": "SiteService_GetSite",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/siteSite"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "tags": [
+          "SiteService"
+        ]
+      }
+    },
+    "/v1/sites": {
+      "get": {
+        "summary": "List all sites",
+        "description": "Use this API to get a list of all sites",
+        "operationId": "SiteService_GetSites",
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/siteSite"
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "agent",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "query",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "SiteService"
+        ]
+      },
+      "post": {
+        "summary": "Add site",
+        "description": "Use this API to add a site",
+        "operationId": "SiteService_AddSite",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/siteSite"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/siteAddSiteRequest"
+            }
+          }
+        ],
+        "tags": [
+          "SiteService"
+        ]
+      }
+    },
+    "/v1/sites/{id}": {
+      "delete": {
+        "summary": "Delete site",
+        "description": "Use this API to delete a site",
+        "operationId": "SiteService_DeleteSite",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "type": "object",
+              "properties": {}
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "tags": [
+          "SiteService"
+        ]
+      },
+      "patch": {
+        "summary": "Update site",
+        "description": "Use this API to update a site",
+        "operationId": "SiteService_UpdateSite",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/siteSite"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "description": {
+                  "type": "string"
+                },
+                "active": {
+                  "type": "boolean"
+                },
+                "region": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "tags": [
+          "SiteService"
         ]
       }
     },
@@ -1164,7 +1583,7 @@
                 "description": {
                   "type": "string"
                 },
-                "isActive": {
+                "active": {
                   "type": "boolean"
                 }
               }
@@ -1364,34 +1783,46 @@
               "type": "object",
               "properties": {
                 "category": {
-                  "type": "integer",
-                  "format": "int32"
+                  "type": "string"
                 },
-                "activityName": {
+                "issue": {
                   "type": "string"
                 },
                 "description": {
                   "type": "string"
                 },
-                "startDate": {
+                "reportingDate": {
                   "type": "string",
                   "format": "date-time"
                 },
-                "endDate": {
+                "expectedClosureDate": {
                   "type": "string",
                   "format": "date-time"
                 },
                 "assignee": {
-                  "type": "integer",
-                  "format": "int32"
+                  "type": "string"
                 },
                 "priority": {
+                  "type": "string"
+                },
+                "status": {
+                  "type": "string"
+                },
+                "product": {
+                  "type": "string"
+                },
+                "site": {
+                  "type": "string"
+                },
+                "sla": {
                   "type": "integer",
                   "format": "int32"
                 },
-                "status": {
-                  "type": "integer",
-                  "format": "int32"
+                "resolution": {
+                  "type": "string"
+                },
+                "rootCause": {
+                  "type": "string"
                 }
               }
             }
@@ -1589,13 +2020,16 @@
             "schema": {
               "type": "object",
               "properties": {
-                "firstName": {
+                "firstname": {
                   "type": "string"
                 },
-                "lastName": {
+                "lastname": {
                   "type": "string"
                 },
                 "username": {
+                  "type": "string"
+                },
+                "password": {
                   "type": "string"
                 },
                 "email": {
@@ -1605,14 +2039,12 @@
                   "type": "string"
                 },
                 "department": {
-                  "type": "integer",
-                  "format": "int32"
+                  "type": "string"
                 },
                 "role": {
-                  "type": "integer",
-                  "format": "int32"
+                  "type": "string"
                 },
-                "isActive": {
+                "active": {
                   "type": "boolean"
                 }
               }
@@ -1691,7 +2123,7 @@
         "description": {
           "type": "string"
         },
-        "isActive": {
+        "active": {
           "type": "boolean"
         }
       }
@@ -1709,7 +2141,7 @@
         "description": {
           "type": "string"
         },
-        "isActive": {
+        "active": {
           "type": "boolean"
         },
         "createdAt": {
@@ -1746,7 +2178,7 @@
         "description": {
           "type": "string"
         },
-        "isActive": {
+        "active": {
           "type": "boolean"
         }
       }
@@ -1764,7 +2196,7 @@
         "description": {
           "type": "string"
         },
-        "isActive": {
+        "active": {
           "type": "boolean"
         },
         "createdAt": {
@@ -1819,7 +2251,7 @@
         "description": {
           "type": "string"
         },
-        "isActive": {
+        "active": {
           "type": "boolean"
         }
       }
@@ -1852,7 +2284,7 @@
         "description": {
           "type": "string"
         },
-        "isActive": {
+        "active": {
           "type": "boolean"
         },
         "createdAt": {
@@ -1864,6 +2296,62 @@
           "format": "date-time"
         }
       }
+    },
+    "productAddProductRequest": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "active": {
+          "type": "boolean"
+        }
+      }
+    },
+    "productGetProductsResponse": {
+      "type": "object",
+      "properties": {
+        "products": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/productProduct"
+          }
+        },
+        "pages": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "productProduct": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "active": {
+          "type": "boolean"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "title": "New, Inprogress, Resolved"
     },
     "protobufAny": {
       "type": "object",
@@ -1883,7 +2371,7 @@
         "description": {
           "type": "string"
         },
-        "isActive": {
+        "active": {
           "type": "boolean"
         },
         "isAdmin": {
@@ -1949,30 +2437,9 @@
         }
       }
     },
-    "roleRole": {
+    "rolePermissions": {
       "type": "object",
       "properties": {
-        "id": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "name": {
-          "type": "string"
-        },
-        "description": {
-          "type": "string"
-        },
-        "isActive": {
-          "type": "boolean"
-        },
-        "createdAt": {
-          "type": "string",
-          "format": "date-time"
-        },
-        "updatedAt": {
-          "type": "string",
-          "format": "date-time"
-        },
         "isAdmin": {
           "type": "boolean",
           "title": "role definitions"
@@ -2021,6 +2488,97 @@
         }
       }
     },
+    "roleRole": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "active": {
+          "type": "boolean"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "permissions": {
+          "$ref": "#/definitions/rolePermissions"
+        }
+      }
+    },
+    "siteAddSiteRequest": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "active": {
+          "type": "boolean"
+        },
+        "region": {
+          "type": "string"
+        }
+      }
+    },
+    "siteGetSitesResponse": {
+      "type": "object",
+      "properties": {
+        "sites": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/siteSite"
+          }
+        },
+        "pages": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "siteSite": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "active": {
+          "type": "boolean"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "region": {
+          "type": "string"
+        }
+      },
+      "title": "New, Inprogress, Resolved"
+    },
     "statusAddStatusRequest": {
       "type": "object",
       "properties": {
@@ -2030,7 +2588,7 @@
         "description": {
           "type": "string"
         },
-        "isActive": {
+        "active": {
           "type": "boolean"
         }
       }
@@ -2054,39 +2612,38 @@
       "type": "object",
       "properties": {
         "category": {
-          "type": "integer",
-          "format": "int32"
+          "type": "string"
         },
-        "activityName": {
+        "issue": {
           "type": "string"
         },
         "description": {
           "type": "string"
         },
-        "startDate": {
+        "reportingDate": {
           "type": "string",
           "format": "date-time"
         },
-        "endDate": {
+        "expectedClosureDate": {
           "type": "string",
           "format": "date-time"
         },
         "assignee": {
-          "type": "integer",
-          "format": "int32"
+          "type": "string"
         },
         "priority": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "attachments": {
-          "type": "array",
-          "items": {
-            "type": "string",
-            "format": "byte"
-          }
+          "type": "string"
         },
         "status": {
+          "type": "string"
+        },
+        "product": {
+          "type": "string"
+        },
+        "site": {
+          "type": "string"
+        },
+        "sla": {
           "type": "integer",
           "format": "int32"
         }
@@ -2117,34 +2674,43 @@
         "category": {
           "type": "string"
         },
-        "activityName": {
+        "issue": {
           "type": "string"
         },
         "description": {
           "type": "string"
         },
-        "startDate": {
+        "reportingDate": {
           "type": "string",
           "format": "date-time"
         },
-        "endDate": {
+        "expectedClosureDate": {
           "type": "string",
           "format": "date-time"
         },
         "assignee": {
-          "type": "integer",
-          "format": "int32"
+          "type": "string"
         },
         "priority": {
           "type": "string"
         },
-        "attachments": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
         "status": {
+          "type": "string"
+        },
+        "product": {
+          "type": "string"
+        },
+        "site": {
+          "type": "string"
+        },
+        "sla": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "resolution": {
+          "type": "string"
+        },
+        "rootCause": {
           "type": "string"
         }
       }
@@ -2152,13 +2718,16 @@
     "userAddUserRequest": {
       "type": "object",
       "properties": {
-        "firstName": {
+        "firstname": {
           "type": "string"
         },
-        "lastName": {
+        "lastname": {
           "type": "string"
         },
         "username": {
+          "type": "string"
+        },
+        "password": {
           "type": "string"
         },
         "email": {
@@ -2168,14 +2737,12 @@
           "type": "string"
         },
         "department": {
-          "type": "integer",
-          "format": "int32"
+          "type": "string"
         },
         "role": {
-          "type": "integer",
-          "format": "int32"
+          "type": "string"
         },
-        "isActive": {
+        "active": {
           "type": "boolean"
         }
       }
@@ -2202,10 +2769,10 @@
           "type": "integer",
           "format": "int32"
         },
-        "firstName": {
+        "firstname": {
           "type": "string"
         },
-        "lastName": {
+        "lastname": {
           "type": "string"
         },
         "username": {
@@ -2223,7 +2790,7 @@
         "role": {
           "type": "string"
         },
-        "isActive": {
+        "active": {
           "type": "boolean"
         },
         "createdAt": {
@@ -2270,7 +2837,7 @@
         "description": {
           "type": "string"
         },
-        "isActive": {
+        "active": {
           "type": "boolean"
         },
         "createdAt": {
